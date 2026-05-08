@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumen Unidad 1 – Probabilidad</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  :root {
+    --bg: #f9f6f0;
+    --card: #ffffff;
+    --accent: #2d4a7a;
+    --accent2: #c0392b;
+    --accent3: #16a085;
+    --formula-bg: #eaf2ff;
+    --formula-border: #2d4a7a;
+    --example-bg: #fff8e1;
+    --example-border: #f39c12;
+    --tip-bg: #eafaf1;
+    --tip-border: #16a085;
+    --text: #1a1a2e;
+    --muted: #5a6075;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  header {
+    background: var(--accent);
+    color: white;
+    padding: 48px 40px 36px;
+    text-align: center;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    font-size: 1rem;
+    opacity: 0.82;
+    font-weight: 300;
+  }
+
+  nav {
+    background: #1a2f52;
+    padding: 14px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  nav a {
+    color: #a8c4e8;
+    text-decoration: none;
+    font-size: 0.87rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid #3a5a8a;
+    transition: all 0.2s;
+  }
+  nav a:hover { background: #2d4a7a; color: white; }
+
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 36px 24px 60px;
+  }
+
+  section {
+    margin-bottom: 48px;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.85rem;
+    color: var(--accent);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 1.18rem;
+    font-weight: 600;
+    color: var(--accent2);
+    margin: 24px 0 10px;
+  }
+
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent3);
+    margin: 16px 0 6px;
+  }
+
+  p { margin-bottom: 12px; }
+
+  ul, ol { padding-left: 22px; margin-bottom: 12px; }
+  li { margin-bottom: 6px; }
+
+  .formula {
+    background: var(--formula-bg);
+    border-left: 4px solid var(--formula-border);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 1.05rem;
+    color: #1a2e55;
+    overflow-x: auto;
+  }
+
+  .formula .label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .example {
+    background: var(--example-bg);
+    border-left: 4px solid var(--example-border);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 0.96rem;
+  }
+
+  .example .label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #d35400;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .tip {
+    background: var(--tip-bg);
+    border-left: 4px solid var(--tip-border);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 0.94rem;
+    color: #0e6655;
+  }
+
+  .tip::before {
+    content: "✔ ";
+    font-weight: 700;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 14px 0;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid #e0e0e8;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  .card h4 { margin-top: 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 0.93rem;
+  }
+
+  th {
+    background: var(--accent);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  td {
+    padding: 9px 14px;
+    border-bottom: 1px solid #e8e8f0;
+  }
+
+  tr:nth-child(even) td { background: #f5f5fa; }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-blue { background: #d6e4f7; color: #1a3a6e; }
+  .badge-red { background: #fde8e6; color: #922b21; }
+  .badge-green { background: #d5f5e3; color: #145a32; }
+
+  .separator {
+    border: none;
+    border-top: 1px solid #dde;
+    margin: 32px 0;
+  }
+
+  @media (max-width: 600px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Probabilidad — Unidad 1</h1>
+  <p>Resumen de conceptos, fórmulas y ejemplos · Análisis y Gestión de Datos · 2026</p>
+</header>
+
+<nav>
+  <a href="#fundamentos">Fundamentos</a>
+  <a href="#tipos">Tipos de Probabilidad</a>
+  <a href="#espacio">Espacio Muestral</a>
+  <a href="#conteo">Reglas de Conteo</a>
+  <a href="#permutaciones">Permutaciones</a>
+  <a href="#variaciones">Variaciones</a>
+  <a href="#combinaciones">Combinaciones</a>
+  <a href="#calculo">Cálculo de Prob.</a>
+  <a href="#reglas">Reglas (Adición/Multiplicación)</a>
+  <a href="#tp1">TP1 Resuelto</a>
+</nav>
+
+<main>
+
+<!-- ========================= SECCIÓN 1 ========================= -->
+<section id="fundamentos">
+  <h2>1. Fundamentos de Probabilidad</h2>
+
+  <p>La <strong>probabilidad</strong> es una medida cuantitativa (número entre 0 y 1) que evalúa qué tan posible es que ocurra un evento.</p>
+
+  <div class="formula">
+    <span class="label">Escala de probabilidad</span>
+    0 ≤ P(A) ≤ 1<br><br>
+    P = 0  → el evento <em>nunca</em> ocurre<br>
+    P = 1  → el evento <em>siempre</em> ocurre
+  </div>
+
+  <p>Se expresa como fracción (1/4), decimal (0.25) o porcentaje (25%).</p>
+
+  <h3>Tipos de decisión según la incertidumbre</h3>
+  <div class="grid-2">
+    <div class="card">
+      <h4>🎯 Certeza</h4>
+      <p>Se conoce con exactitud el resultado. No hay aleatoriedad.</p>
+    </div>
+    <div class="card">
+      <h4>🎲 Riesgo</h4>
+      <p>Hay más de un resultado posible, pero se conocen (o estiman) las probabilidades.</p>
+    </div>
+    <div class="card">
+      <h4>❓ Incertidumbre</h4>
+      <p>Hay más de un resultado posible, pero las probabilidades son desconocidas.</p>
+    </div>
+    <div class="card">
+      <h4>🧠 Prob. subjetiva</h4>
+      <p>Basada en creencias y experiencia personal; varía de persona a persona.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- ========================= SECCIÓN 2 ========================= -->
+<section id="tipos">
+  <h2>2. Tipos de Probabilidad</h2>
+
+  <h3>Probabilidad Clásica (a priori / Laplace)</h3>
+  <div class="formula">
+    <span class="label">Regla de Laplace</span>
+    P(A) = Número de casos favorables / Número de casos posibles
+  </div>
+  <div class="tip">Válida solo cuando todos los resultados son <strong>igualmente probables (equiprobables)</strong>.</div>
+  <div class="example">
+    <span class="label">Ejemplo</span>
+    Dado de 6 caras. P(sacar 4) = 1/6 ≈ 0.167
+  </div>
+
+  <h3>Probabilidad Frecuencial (empírica)</h3>
+  <p>Se calcula observando la frecuencia relativa de un evento en muchas repeticiones del experimento.</p>
+  <div class="formula">
+    <span class="label">Frecuencia relativa</span>
+    P(A) ≈ Número de veces que ocurrió A / Total de repeticiones
+  </div>
+  <div class="example">
+    <span class="label">Ejemplo</span>
+    Una máquina produjo 500 piezas; 20 resultaron defectuosas.<br>
+    P(defectuosa) = 20/500 = 0.04 = 4%
+  </div>
+
+  <h3>Probabilidad Subjetiva</h3>
+  <p>Basada en la experiencia, intuición y evidencia disponible del individuo. Dos personas pueden asignar probabilidades distintas al mismo evento.</p>
+</section>
+
+<hr class="separator">
+
+<!-- ========================= SECCIÓN 3 ========================= -->
+<section id="espacio">
+  <h2>3. Espacio Muestral y Eventos</h2>
+
+  <table>
+    <tr><th>Concepto</th><th>Definición</th><th>Ejemplo</th></tr>
+    <tr><td><strong>Experimento</strong></td><td>Proceso que genera resultados determinados</td><td>Lanzar una moneda</td></tr>
+    <tr><td><strong>Espacio muestral (S)</strong></td><td>Conjunto de todos los posibles resultados</td><td>S = {Cara, Ceca}</td></tr>
+    <tr><td><strong>Evento</strong></td><td>Uno o más resultados del experimento</td><td>A = {Cara}</td></tr>
+    <tr><td><strong>Evento simple</strong></td><td>Resultado individual del experimento</td><td>E₁ = Cara</td></tr>
+  </table>
+
+  <h3>Propiedades clave</h3>
+  <div class="grid-2">
+    <div class="card">
+      <h4>Mutuamente excluyentes</h4>
+      <p>No pueden ocurrir dos eventos al mismo tiempo.<br>
+      <em>Ejemplo:</em> Cara y Ceca en un lanzamiento.</p>
+    </div>
+    <div class="card">
+      <h4>Colectivamente exhaustivos</h4>
+      <p>La lista incluye todos los eventos posibles.<br>
+      <em>Ejemplo:</em> {Cara, Ceca} en una moneda.</p>
+    </div>
+  </div>
+
+  <div class="formula">
+    <span class="label">Complemento</span>
+    P(A) + P(no A) = 1 &nbsp;&nbsp;→&nbsp;&nbsp; P(no A) = 1 − P(A)
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- ========================= SECCIÓN 4 ========================= -->
+<section id="conteo">
+  <h2>4. Reglas de Conteo</h2>
+
+  <h3>Principio Multiplicativo</h3>
+  <p>Si hay n₁ formas de hacer la 1ª tarea, n₂ formas de la 2ª, …, nₖ formas de la k-ésima, el total de resultados posibles es:</p>
+  <div class="formula">
+    <span class="label">Principio multiplicativo</span>
+    Total = n₁ × n₂ × n₃ × … × nₖ
+  </div>
+  <div class="example">
+    <span class="label">Ejemplo — Menú del restaurante</span>
+    5 entradas × 5 platos principales × 5 postres = <strong>125 combinaciones</strong><br>
+    P(elegir el mismo menú que otro comensal) = 1/125
+  </div>
+
+  <h3>Factorial</h3>
+  <div class="formula">
+    <span class="label">Definición</span>
+    n! = n × (n−1) × (n−2) × … × 1<br><br>
+    0! = 1 &nbsp;&nbsp;&nbsp;&nbsp; (por definición)<br>
+    1! = 1<br>
+    4! = 4×3×2×1 = 24<br>
+    6! = 720
+  </div>
+
+  <h3>Esquema general de técnicas de conteo</h3>
+  <table>
+    <tr><th>Técnica</th><th>¿Importa el orden?</th><th>¿Todos los elementos?</th><th>¿Repetición?</th></tr>
+    <tr><td>Permutación sin repetición</td><td>✅ Sí</td><td>✅ Todos</td><td>❌ No</td></tr>
+    <tr><td>Permutación con repetición</td><td>✅ Sí</td><td>✅ Todos (con repetidos)</td><td>✅ Hay repetidos</td></tr>
+    <tr><td>Permutación circular</td><td>✅ Sí (en círculo)</td><td>✅ Todos</td><td>❌ No</td></tr>
+    <tr><td>Variación sin repetición</td><td>✅ Sí</td><td>❌ Algunos</td><td>❌ No</td></tr>
+    <tr><td>Combinación</td><td>❌ No</td><td>❌ Algunos</td><td>❌ No</td></tr>
+  </table>
+</section>
+
+<hr class="separator">
+
+<!-- ========================= SECCIÓN 5 ========================= -->
+<section id="permutaciones">
+  <h2>5. Permutaciones</h2>
+
+  <h3>5.1 Permutación sin repetición</h3>
+  <p>Ordenar <strong>todos</strong> los elementos de un conjunto (importa el orden, sin repetir).</p>
+  <div class="formula">
+    <span class="label">Fórmula</span>
+    P(n) = n!
+  </div>
+  <div class="example">
+    <span class="label">Ejemplo — Empresa PaqBox (6 letras)</span>
+    P(6) = 6! = 720 anagramas posibles.<br>
+    600 empleados → P(elegir clave ya usada) = 600/720 ≈ 83.33%
+  </div>
+  <div class="example">
+    <span class="label">Ejemplo — 3 evaluadores en 3 sillas</span>
+    P(3) = 3! = 6 formas diferentes de sentarse.
+  </div>
+
+  <h3>5.2 Permutación con repetición</h3>
+  <p>Cuando algunos elementos del conjunto se repiten, se divide por el factorial de cada repetición.</p>
+  <div class="formula">
+    <span class="label">Fórmula</span>
+    PRⁿ(m,r,…,s) = n! / (m! · r! · … · s!)<br><br>
+    donde m, r, …, s = cantidad de veces que se repite cada elemento
+  </div>
+  <div class="example">
+    <span class="label">Ejemplo — Anagramas de MATEMÁTICA (10 letras)</span>
+    Letras: A(×3), M(×2), T(×2), E, I, C → n=10<br>
+    PR¹⁰(3,2,2) = 10! / (3! · 2! · 2!) = 3.628.800 / 24 = <strong>151.200 anagramas</strong>
+  </div>
+
+  <h3>5.3 Permutación circular</h3>
+  <p>Los elementos se ordenan en círculo; las rotaciones se consideran la misma disposición.</p>
+  <div class="formula">
+    <span class="label">Fórmula</span>
+    PC(n) = n! / n = (n−1)!
+  </div>
+  <div class="example">
+    <span class="label">Ejemplo — 4 personas alrededor de una mesa</span>
+    PC(4) = (4−1)! = 3! = <strong>6 formas diferentes</strong>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- ========================= SECCIÓN 6 ========================= -->
+<section id="variaciones">
+  <h2>6. Variaciones sin Repetición</h2>
+  <p>Ordenar <strong>algunos</strong> elementos de un conjunto (importa el orden, sin repetir). También llamadas permutaciones distinguibles.</p>
+  <div class="formula">
+    <span class="label">Fórmula</span>
+    V(m,n) = Vᵐₙ = m! / (m−n)!<br><br>
+    m = total de elementos disponibles<br>
+    n = cantidad a seleccionar (subgrupo)
+  </div>
+  <div class="example">
+    <span class="label">Ejemplo — Comisión directiva: 3 cargos de 6 candidatos</span>
+    V(6,3) = 6! / (6−3)! = 720/6 = <strong>120 formas</strong>
+  </div>
+  <div class="example">
+    <span class="label">Ejemplo — Carrera de caballos: 3 primeros puestos de 10</span>
+    V(10,3) = 10! / 7! = <strong>720 posibilidades</strong><br>
+    P(3 caballos específicos en ese orden) = 1/720 ≈ 0.138%
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- ========================= SECCIÓN 7 ========================= -->
+<section id="combinaciones">
+  <h2>7. Combinaciones (y Número Combinatorio)</h2>
+  <p>Agrupar <strong>algunos</strong> elementos de un conjunto donde <strong>NO importa el orden</strong> y sin repetición.</p>
+  <div class="formula">
+    <span class="label">Fórmula — Combinaciones = Número combinatorio</span>
+    C(m,n) = (m choose n) = m! / [(m−n)! · n!]
+  </div>
+  <div class="tip">La diferencia con variaciones: se divide además por n! (las permutaciones del subgrupo, que no son distintas en combinaciones).</div>
+
+  <div class="example">
+    <span class="label">Ejemplo — 3 administrativos de 6 candidatos (sin jerarquía)</span>
+    C(6,3) = 6! / (3! · 3!) = 720/6 = <strong>20 grupos distintos</strong>
+  </div>
+
+  <div class="example">
+    <span class="label">Ejemplo — Comité: 2 hombres de 3 y 2 mujeres de 3</span>
+    C(3,2) × C(3,2) = 3 × 3 = <strong>9 formas</strong>
+  </div>
+
+  <div class="example">
+    <span class="label">Ejemplo TP1 — Guardias de 2 de 11 empleados (todo un año)</span>
+    C(11,2) = 11! / (9!·2!) = <strong>55 guardias únicas</strong><br>
+    Un año tiene 52 fines de semana → ¡sí es posible sin repetir!
+  </div>
+
+  <div class="example">
+    <span class="label">Ejemplo TP1 — Helados: 3 sabores distintos de 31</span>
+    Sin importar orden → C(31,3) = 31!/(28!·3!) = <strong>4.495 capelinas</strong><br>
+    Si importara el orden → V(31,3) = 31!/28! = <strong>26.970</strong> (el número que publicita la heladería)
+  </div>
+
+  <div class="example">
+    <span class="label">Ejemplo TP1 — Condimentos: 8 condimentos, 256 opciones</span>
+    Suma de combinaciones de 0 a 8 condimentos:<br>
+    C(8,0)+C(8,1)+C(8,2)+…+C(8,8) = 1+8+28+56+70+56+28+8+1 = <strong>256 = 2⁸</strong>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- ========================= SECCIÓN 8 ========================= -->
+<section id="calculo">
+  <h2>8. Cálculo de Probabilidades</h2>
+
+  <h3>Fórmula base</h3>
+  <div class="formula">
+    <span class="label">Regla de Laplace general</span>
+    P(A) = Casos favorables / Casos totales
+  </div>
+
+  <h3>Probabilidades marginales y conjuntas</h3>
+  <table>
+    <tr><th>Tipo</th><th>¿Qué mide?</th><th>Ejemplo</th></tr>
+    <tr><td><span class="badge badge-blue">Marginal</span></td><td>Probabilidad de un solo evento</td><td>P(ser hombre) = 0.80</td></tr>
+    <tr><td><span class="badge badge-red">Conjunta</span></td><td>Probabilidad de dos eventos simultáneos</td><td>P(hombre y promovido) = 0.24</td></tr>
+    <tr><td><span class="badge badge-green">Condicional</span></td><td>Prob. de A sabiendo que ocurrió B</td><td>P(promovido | mujer)</td></tr>
+  </table>
+
+  <div class="example">
+    <span class="label">Ejemplo — Tabla de probabilidades (corporación 1200 agentes)</span>
+    <table>
+      <tr><th></th><th>Hombre</th><th>Mujer</th><th>Total</th></tr>
+      <tr><td>Promovido</td><td>0.24</td><td>0.03</td><td>0.27</td></tr>
+      <tr><td>No promovido</td><td>0.56</td><td>0.17</td><td>0.73</td></tr>
+      <tr><td><strong>Total</strong></td><td><strong>0.80</strong></td><td><strong>0.20</strong></td><td><strong>1.00</strong></td></tr>
+    </table>
+    Sombreado central = probabilidades <em>conjuntas</em> · Márgenes = probabilidades <em>marginales</em>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- ========================= SECCIÓN 9 ========================= -->
+<section id="reglas">
+  <h2>9. Reglas Fundamentales</h2>
+
+  <h3>9.1 Regla de la Adición</h3>
+
+  <h4>Eventos mutuamente excluyentes</h4>
+  <div class="formula">
+    <span class="label">Adición — mutuamente excluyentes</span>
+    P(A o B) = P(A) + P(B)
+  </div>
+  <div class="example">
+    <span class="label">Ejemplo</span>
+    5 candidatos para gerente. Braian y Carina son del matrimonio.<br>
+    P(Braian) = 1/5 = 0.20 · P(Carina) = 1/5 = 0.20<br>
+    P(Braian o Carina) = 0.20 + 0.20 = <strong>0.40 (40%)</strong><br>
+    P(ninguno del matrimonio) = 1 − 0.40 = <strong>0.60 (60%)</strong>
+  </div>
+
+  <h4>Eventos NO mutuamente excluyentes</h4>
+  <div class="formula">
+    <span class="label">Adición general</span>
+    P(A o B) = P(A) + P(B) − P(A y B)
+  </div>
+  <div class="tip">Se resta P(A y B) para evitar contar doble la intersección.</div>
+  <div class="example">
+    <span class="label">Ejemplo — Sacar un As o Copa de un mazo de 50 cartas</span>
+    P(As) = 4/50 · P(Copa) = 12/50 · P(As y Copa) = 1/50<br>
+    P(As o Copa) = 4/50 + 12/50 − 1/50 = <strong>15/50 = 0.30</strong>
+  </div>
+  <div class="example">
+    <span class="label">Ejemplo — Empresa de envasado (50 empleados)</span>
+    P(T) = 5/50 · P(V) = 6/50 · P(T y V) = 2/50<br>
+    P(calificación baja) = 5/50 + 6/50 − 2/50 = <strong>9/50 = 0.18 (18%)</strong>
+  </div>
+
+  <h3>9.2 Regla de la Multiplicación (Probabilidad Conjunta)</h3>
+
+  <h4>Eventos independientes</h4>
+  <div class="formula">
+    <span class="label">Multiplicación — eventos independientes</span>
+    P(A y B) = P(A) × P(B)<br>
+    También notado: P(A ∩ B) o P(AB)
+  </div>
+  <div class="example">
+    <span class="label">Ejemplo — 3 lanzamientos de moneda: ¿3 caras seguidas?</span>
+    P(C y C y C) = 1/2 × 1/2 × 1/2 = <strong>1/8 = 0.125</strong><br>
+    P(1 cara y 2 cecas, sin importar orden) = 3/8 (hay 3 casos favorables en 8)
+  </div>
+
+  <div class="example">
+    <span class="label">Ejemplo TP1 — Multiple choice: 4 preguntas, 5 opciones cada una</span>
+    P(todas correctas) = 1/5 × 1/5 × 1/5 × 1/5 = <strong>1/625 = 0.0016 (0.16%)</strong>
+  </div>
+
+  <h3>9.3 Complemento</h3>
+  <div class="formula">
+    <span class="label">Complemento</span>
+    P(no A) = 1 − P(A)
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- ========================= SECCIÓN 10 ========================= -->
+<section id="tp1">
+  <h2>10. Problemas Resueltos del TP1</h2>
+  <p style="color:var(--muted); font-size:0.93rem; margin-bottom:18px;">Síntesis de los ejercicios con la técnica y resultado final.</p>
+
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Problema</th>
+      <th>Técnica</th>
+      <th>Resultado</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Multiple choice: 4 preguntas, 5 opciones</td>
+      <td>Multiplicación — eventos independientes</td>
+      <td>P = 1/625 ≈ 0.16%</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Asiento junto a la ventana (familia de 4)</td>
+      <td>Laplace: 1 caso favorable / 4 posibles</td>
+      <td>P = 1/4 = 25%</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Patentes argentinas (LLNNNLL, sin Ñ)</td>
+      <td>Principio multiplicativo: 25×25×10×10×10×25×25</td>
+      <td>≈ 45 millones</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Equipo gestión: 1 director + 1 de cada dpto</td>
+      <td>Combinación total C(13,5)=1287; favorables: 2×4×2×3×2=96</td>
+      <td>P = 96/1287 ≈ 7.45%</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Clave Home Banking: 4 letras + 4 números</td>
+      <td>Principio multiplicativo: 27⁴ × 10⁴</td>
+      <td>5.314.410.000 combinaciones posibles</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Carrera de 10 caballos: 3 primeros puestos</td>
+      <td>Variación sin rep.: V(10,3) = 720</td>
+      <td>P = 1/720 ≈ 0.138%</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Menú más costoso (1 × 8 × 8 opciones)</td>
+      <td>Principio multiplicativo: 64 opciones</td>
+      <td>P = 1/64 ≈ 1.56%</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Directorio de 5 socios en 5 cargos rotando</td>
+      <td>Permutación sin rep. / 1 arreglo posible</td>
+      <td>P = 1/5! = 1/120 ≈ 0.83%</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Guardias de 2 de 11 empleados (52 fines)</td>
+      <td>Combinación: C(11,2) = 55</td>
+      <td>Sí, 55 > 52 ✅</td>
+    </tr>
+    <tr>
+      <td>11a</td>
+      <td>Presidente, VP, Sec, Tesorero de 20 candidatos</td>
+      <td>Variación sin rep.: V(20,4) = 116.280</td>
+      <td>116.280 posibilidades</td>
+    </tr>
+    <tr>
+      <td>11b</td>
+      <td>3 Vocales de 16 candidatos restantes</td>
+      <td>Combinación: C(16,3) = 560</td>
+      <td>560 posibilidades</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Capelinas: 3 sabores de 31 (sin repetir)</td>
+      <td>C(31,3)=4.495 (sin orden) o V(31,3)=26.970 (con orden)</td>
+      <td>La heladería usa variación (≈27.000)</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>8 condimentos → 256 opciones</td>
+      <td>Suma de C(8,k) para k=0…8 = 2⁸</td>
+      <td>256 ✅</td>
+    </tr>
+    <tr>
+      <td>14a</td>
+      <td>3 becas iguales de 17 empleados</td>
+      <td>Combinación: C(17,3) = 680</td>
+      <td>680 formas</td>
+    </tr>
+    <tr>
+      <td>14b</td>
+      <td>3 becas distintas de 17 empleados</td>
+      <td>Variación: V(17,3) = 4.080</td>
+      <td>4.080 formas</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>5 amigos en cine (3M + 2V juntos)</td>
+      <td>3!×2! + 2!×3! = 12+12</td>
+      <td>24 formas</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>Producción de leche descremada</td>
+      <td>Análisis conceptual</td>
+      <td>Decisión de <strong>RIESGO</strong> (datos históricos disponibles)</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>Contraseñas de 4 caracteres alfanuméricos sin repetir</td>
+      <td>Variación: V(64,4) con 64=27+27+10 caracteres</td>
+      <td>15.249.024 contraseñas únicas; P=100% (sistema genera automáticamente)</td>
+    </tr>
+  </table>
+</section>
+
+<hr class="separator">
+
+<!-- ========================= FORMULARIO RESUMEN ========================= -->
+<section>
+  <h2>📋 Tabla Rápida de Fórmulas</h2>
+  <table>
+    <tr><th>Técnica</th><th>Fórmula</th><th>Cuándo usarla</th></tr>
+    <tr><td>Principio multiplicativo</td><td>n₁ × n₂ × … × nₖ</td><td>Tareas independientes en secuencia</td></tr>
+    <tr><td>Factorial</td><td>n! = n×(n-1)×…×1</td><td>Base de todas las fórmulas</td></tr>
+    <tr><td>Permutación s/rep.</td><td>P(n) = n!</td><td>Todos los elementos, importa el orden</td></tr>
+    <tr><td>Permutación c/rep.</td><td>PRⁿ(m,r,…) = n!/(m!·r!·…)</td><td>Todos los elementos, hay repetidos</td></tr>
+    <tr><td>Permutación circular</td><td>PC(n) = (n−1)!</td><td>Todos en círculo, importa el orden</td></tr>
+    <tr><td>Variación s/rep.</td><td>V(m,n) = m!/(m−n)!</td><td>Algunos elementos, importa el orden</td></tr>
+    <tr><td>Combinación</td><td>C(m,n) = m!/[(m−n)!·n!]</td><td>Algunos elementos, NO importa el orden</td></tr>
+    <tr><td>Adición (excl.)</td><td>P(A o B) = P(A)+P(B)</td><td>Eventos mutuamente excluyentes</td></tr>
+    <tr><td>Adición (no excl.)</td><td>P(A o B) = P(A)+P(B)−P(AB)</td><td>Pueden ocurrir juntos</td></tr>
+    <tr><td>Multiplicación</td><td>P(A y B) = P(A)×P(B)</td><td>Eventos independientes</td></tr>
+    <tr><td>Complemento</td><td>P(no A) = 1 − P(A)</td><td>Siempre aplica</td></tr>
+  </table>
+</section>
+
+</main>
+</body>
+</html>
