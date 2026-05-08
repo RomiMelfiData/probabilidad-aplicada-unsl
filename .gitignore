@@ -1,2 +1,4 @@
 # PDFs (libros y enunciados pesados)
 *.pdf
+*.docx
+*.xlsx
